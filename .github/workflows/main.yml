@@ -26,7 +26,7 @@ jobs:
         run: |
           $url = "${{ github.server_url }}/${{ github.repository }}/issues/new?title=Build+Failure+on+${{ github.ref_name }}&body=Check+logs+here:+${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
-          echo "#### [REPORT AN ISSUE]($url)" >> $env:GITHUB_STEP_SUMMARY
+          echo "#### [Report an issue]($url)" >> $env:GITHUB_STEP_SUMMARY
 
   deploy-phase:
       needs: test-phase
