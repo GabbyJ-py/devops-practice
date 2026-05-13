@@ -3,27 +3,34 @@ on:
   push:
     branches: ['main']
 jobs:
-  test-and-deploy:
+  test-phase:
     runs-on: windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        
       - name: Setup python
         uses: actions/setup-python@v4
         with: 
           python-version: '3.13.12'
+          
       - name: Run test in powershell
         shell: powershell
         run: |
           pip install pytest
           python -m pytest test_app.py
-      - name: Deploy to local folder
-        shell: powershell
-        run: |
-          $deployPath = "C:\Users\Gabby\OneDrive\Desktop\DevOps"
-          if (!(Test-Path $deployPath)) {
-            New-Item -ItemType Directory -Path $deployPath
-            echo "Folder created"
-          }
-          Copy-Item -Path "app.py" -Destination $deployPath
-          echo "Application successfully deployed"
+
+  deploy-phase:
+      needs: test-phase
+      runs-on: windows-latest
+      steps:
+        - name: Deploy to local folder
+          shell: powershell
+          run: |
+            $deployPath = "C:\Users\Gabby\OneDrive\Desktop\DevOps"
+            if (!(Test-Path $deployPath)) {
+              New-Item -ItemType Directory -Path $deployPath
+              echo "Folder created"
+            }
+            Copy-Item -Path "app.py" -Destination $deployPath
+            echo "Application successfully deployed"
