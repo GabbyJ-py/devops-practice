@@ -27,7 +27,7 @@ jobs:
         - name: Deploy to local folder
           shell: powershell
           run: |
-            $deployPath = "C:\Users\Gabby\OneDrive\Desktop\DevOps"
+            $deployPath = "C:\DevOps"
             if (!(Test-Path $deployPath)) {
               New-Item -ItemType Directory -Path $deployPath
               echo "Folder created"
