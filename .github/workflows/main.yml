@@ -24,6 +24,9 @@ jobs:
       needs: test-phase
       runs-on: windows-latest
       steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+          
         - name: Deploy to local folder
           shell: powershell
           run: |
