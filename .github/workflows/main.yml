@@ -37,3 +37,9 @@ jobs:
             }
             Copy-Item -Path "app.py" -Destination $deployPath
             echo "Application successfully deployed"
+
+        - name: Save good files
+          uses: actions/upload-artifact@v4
+          with:
+            name: final-app
+            path: app.py
